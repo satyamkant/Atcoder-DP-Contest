@@ -1,5 +1,7 @@
 // Author:- satyam kant//
 
+// Note:- both recursive and iterative dp is provided
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -38,11 +40,21 @@ void solve() {
         cin >> it;
     }
 
-    for (int i = 0; i < n; i++) {
-        dp[i] = -1;
-    }
+    memset(dp, 0, sizeof(dp));
 
-    cout << rec(arr, 0) << endl;
+    dp[1] = abs(arr[0] - arr[1]);
+
+    for (int i = 2; i < n; i++) {
+        dp[i] = min(dp[i - 1] + abs(arr[i - 1] - arr[i]),
+                    dp[i - 2] + abs(arr[i - 2] - arr[i]));
+    }
+    cout << dp[n - 1] << endl;
+    /////////// this part is for recursive /////////////////
+    // for (int i = 0; i < n; i++) {
+    //     dp[i] = -1;
+    // }
+
+    // // cout << rec(arr, 0) << endl;
 }
 
 int32_t main() {
