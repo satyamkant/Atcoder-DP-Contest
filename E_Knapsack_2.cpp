@@ -30,12 +30,24 @@ void solve() {
     dp[0][0] = 0;
     dp[arr[0].second][0] = arr[0].first;
 
-    for (int i = 0; i < 100001; i++) {
-        for (int j = 1; j < arr.size(); j++) {
-            dp[i][j] = min(dp[i][j], dp[i][j - 1]);
-            if (i - arr[j].second >= 0) {
-                dp[i][j] =
-                    min(dp[i][j], arr[j].first + dp[i - arr[j].second][j - 1]);
+    // for (int i = 0; i < 100001; i++) {
+    //     for (int j = 1; j < arr.size(); j++) {
+    //         dp[i][j] = min(dp[i][j], dp[i][j - 1]);
+    //         if (i - arr[j].second >= 0) {
+    //             dp[i][j] =
+    //                 min(dp[i][j], arr[j].first + dp[i - arr[j].second][j -
+    //                 1]);
+    //         }
+    //     }
+    // }
+
+    /// 2nd way of doing the same
+    for (int i = 1; i < n; i++) {
+        for (int val = 0; val < 100001; val++) {
+            dp[val][i] = min(dp[val][i], dp[val][i - 1]);
+            if (val >= arr[i].second) {
+                dp[val][i] = min(dp[val][i],
+                                 dp[val - arr[i].second][i - 1] + arr[i].first);
             }
         }
     }
